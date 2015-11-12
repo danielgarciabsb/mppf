@@ -3,39 +3,110 @@
 #include "default.hpp"
 #endif
 
+#ifndef FILESTREAM_H
+#define FILESTREAM_H
+#include "filestream.hpp"
+#endif
+
 #include "cidade.hpp"
 #include "gerador.hpp"
 #include "adaptador.hpp"
 #include "interconexao.hpp"
 
-int main() {
-  Cidade c1("C1",10,5,20);
-  Gerador g1("G1", 15,10,30,1000);
-  Adaptador a1("A1", 7,7);
-  Interconexao i1("I1", 15,10,10,5,100,0.1,5,1000);
+int main()
+{
+    // Lê o arquivo de configuração
+    ifstream fin("rede_distribuicao.conf");
 
-  // Imprime cidade
-  cout << c1.getNome() << " - pos_x: " << c1.getPosX()
-  << " pos_y: " << c1.getPosY() << " rec " << c1.getRecursoNecessario()
-  << endl;
+    char tipo;
 
-  // Imprime Gerador
-  cout << g1.getNome() << " - pos_x: " << g1.getPosX()
-  << " pos_y: " << g1.getPosY() << " recprod " << g1.getRecursoProduzido()
-  << " custo " << g1.getCustoGerador() << endl;
+    while (fin >> tipo)
+    {
+        switch (tipo) {
+          case 'C':
+          {
+            // Inicializa variaveis
+            string nome;
+            int pos_x, pos_y, recurso_necessario;
 
-  // Imprime Adaptador
-  cout << a1.getNome() << " - pos_x: " << a1.getPosX()
-  << " pos_y: " << a1.getPosY() << endl;
+            // Lê linha do arquivo
+            fin >> nome >> pos_x >> pos_y >> recurso_necessario;
 
-  // Imprime Interconexao
-  cout << i1.getNome()
-  << " - pos_inic_x: " << i1.getPosInicX()
-  << " pos_inic_y: " << i1.getPosInicY()
-  << " pos_final_x: "<< i1.getPosFinalX()
-  << " pos_final_y: " << i1.getPosFinalY()
-  << " capacidade_max: " << i1.getCapacidadeMax()
-  << " chance_falha " << i1.getChanceFalha()
-  << " tempo_conserto " << i1.getTempoConserto()
-  << " custo_do_conserto " << i1.getCustoDoConserto() << endl;
+            // Instancia cidade
+            Cidade cidade(nome, pos_x, pos_y, recurso_necessario);
+
+            // Imprime cidade
+            cout << cidade.getNome() << " - pos_x " << cidade.getPosX()
+            << " pos_y " << cidade.getPosY() << " recurso_necessario " << cidade.getRecursoNecessario()
+            << endl;
+          }
+          break;
+
+          case 'A':
+          {
+            // Inicializa variaveis
+            string nome;
+            int pos_x, pos_y;
+
+            // Lê linha do arquivo
+            fin >> nome >> pos_x >> pos_y;
+
+            // Instancia adaptador
+            Adaptador adaptador(nome, pos_x, pos_y);
+
+            // Imprime adaptador
+            cout << adaptador.getNome() << " - pos_x " << adaptador.getPosX()
+            << " pos_y " << adaptador.getPosY() << endl;
+          }
+          break;
+
+          case 'G':
+          {
+            // Inicializa variaveis
+            string nome;
+            int pos_x, pos_y, recurso_produzido, custo_gerador;
+
+            // Lê linha do arquivo
+            fin >> nome >> pos_x >> pos_y >> recurso_produzido >> custo_gerador;
+
+            // Instancia gerador
+            Gerador gerador(nome, pos_x, pos_y, recurso_produzido, custo_gerador);
+
+            // Imprime gerador
+            cout << gerador.getNome() << " - pos_x " << gerador.getPosX()
+            << " pos_y " << gerador.getPosY() << " recurso_produzido " << gerador.getRecursoProduzido()
+            << " custo_gerador " << gerador.getCustoGerador() << endl;
+          }
+          break;
+
+          case 'I':
+          {
+            // Inicializa variaveis
+            string nome;
+            int pos_inic_x, pos_inic_y, pos_final_x, pos_final_y, capacidade_max,
+            tempo_conserto, custo_do_conserto;
+            float chance_falha;
+
+            // Lê linha do arquivo
+            fin >> nome >> pos_inic_x >> pos_inic_y >> pos_final_x >> pos_final_y
+            >> capacidade_max >> chance_falha >> tempo_conserto >> custo_do_conserto;
+
+            // Instancia interconexao
+            Interconexao interconexao(nome, pos_inic_x, pos_inic_y, pos_final_x, pos_final_y,
+                capacidade_max, chance_falha, tempo_conserto, custo_do_conserto);
+
+            // Imprime interconexao
+            cout << interconexao.getNome()
+            << " - pos_inic_x " << interconexao.getPosInicX()
+            << " pos_inic_y " << interconexao.getPosInicY()
+            << " pos_final_x "<< interconexao.getPosFinalX()
+            << " pos_final_y " << interconexao.getPosFinalY()
+            << " capacidade_max " << interconexao.getCapacidadeMax()
+            << " chance_falha " << interconexao.getChanceFalha()
+            << " tempo_conserto " << interconexao.getTempoConserto()
+            << " custo_do_conserto " << interconexao.getCustoDoConserto() << endl;
+          }
+          break;
+        }
+    }
 }

@@ -31,8 +31,8 @@
             <td class="headerValue">coverage.info.cleaned</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">23</td>
-            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">40</td>
+            <td class="headerCovTableEntry">40</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -65,42 +65,146 @@
 <span class="lineNum">       3 </span>            : #include &quot;default.hpp&quot;
 <span class="lineNum">       4 </span>            : #endif
 <span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span>            : #include &quot;cidade.hpp&quot;
-<span class="lineNum">       7 </span>            : #include &quot;gerador.hpp&quot;
-<span class="lineNum">       8 </span>            : #include &quot;adaptador.hpp&quot;
-<a name="9"><span class="lineNum">       9 </span>            : #include &quot;interconexao.hpp&quot;</a>
+<span class="lineNum">       6 </span>            : #ifndef FILESTREAM_H
+<span class="lineNum">       7 </span>            : #define FILESTREAM_H
+<span class="lineNum">       8 </span>            : #include &quot;filestream.hpp&quot;
+<span class="lineNum">       9 </span>            : #endif
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">          1 : int main() {</span>
-<span class="lineNum">      12 </span><span class="lineCov">          1 :   Cidade c1(&quot;C1&quot;,10,5,20);</span>
-<span class="lineNum">      13 </span><span class="lineCov">          2 :   Gerador g1(&quot;G1&quot;, 15,10,30,1000);</span>
-<span class="lineNum">      14 </span><span class="lineCov">          2 :   Adaptador a1(&quot;A1&quot;, 7,7);</span>
-<span class="lineNum">      15 </span><span class="lineCov">          2 :   Interconexao i1(&quot;I1&quot;, 15,10,10,5,100,0.1,5,1000);</span>
-<span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span>            :   // Imprime cidade
-<span class="lineNum">      18 </span><span class="lineCov">          2 :   cout &lt;&lt; c1.getNome() &lt;&lt; &quot; - pos_x: &quot; &lt;&lt; c1.getPosX()</span>
-<span class="lineNum">      19 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_y: &quot; &lt;&lt; c1.getPosY() &lt;&lt; &quot; rec &quot; &lt;&lt; c1.getRecursoNecessario()</span>
-<span class="lineNum">      20 </span><span class="lineCov">          1 :   &lt;&lt; endl;</span>
-<span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span>            :   // Imprime Gerador
-<span class="lineNum">      23 </span><span class="lineCov">          2 :   cout &lt;&lt; g1.getNome() &lt;&lt; &quot; - pos_x: &quot; &lt;&lt; g1.getPosX()</span>
-<span class="lineNum">      24 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_y: &quot; &lt;&lt; g1.getPosY() &lt;&lt; &quot; recprod &quot; &lt;&lt; g1.getRecursoProduzido()</span>
-<span class="lineNum">      25 </span><span class="lineCov">          2 :   &lt;&lt; &quot; custo &quot; &lt;&lt; g1.getCustoGerador() &lt;&lt; endl;</span>
-<span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span>            :   // Imprime Adaptador
-<span class="lineNum">      28 </span><span class="lineCov">          2 :   cout &lt;&lt; a1.getNome() &lt;&lt; &quot; - pos_x: &quot; &lt;&lt; a1.getPosX()</span>
-<span class="lineNum">      29 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_y: &quot; &lt;&lt; a1.getPosY() &lt;&lt; endl;</span>
-<span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span>            :   // Imprime Interconexao
-<span class="lineNum">      32 </span><span class="lineCov">          2 :   cout &lt;&lt; i1.getNome()</span>
-<span class="lineNum">      33 </span><span class="lineCov">          2 :   &lt;&lt; &quot; - pos_inic_x: &quot; &lt;&lt; i1.getPosInicX()</span>
-<span class="lineNum">      34 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_inic_y: &quot; &lt;&lt; i1.getPosInicY()</span>
-<span class="lineNum">      35 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_final_x: &quot;&lt;&lt; i1.getPosFinalX()</span>
-<span class="lineNum">      36 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_final_y: &quot; &lt;&lt; i1.getPosFinalY()</span>
-<span class="lineNum">      37 </span><span class="lineCov">          2 :   &lt;&lt; &quot; capacidade_max: &quot; &lt;&lt; i1.getCapacidadeMax()</span>
-<span class="lineNum">      38 </span><span class="lineCov">          2 :   &lt;&lt; &quot; chance_falha &quot; &lt;&lt; i1.getChanceFalha()</span>
-<a name="39"><span class="lineNum">      39 </span><span class="lineCov">          2 :   &lt;&lt; &quot; tempo_conserto &quot; &lt;&lt; i1.getTempoConserto()</span></a>
-<span class="lineNum">      40 </span><span class="lineCov">          3 :   &lt;&lt; &quot; custo_do_conserto &quot; &lt;&lt; i1.getCustoDoConserto() &lt;&lt; endl;</span>
-<span class="lineNum">      41 </span><span class="lineCov">          4 : }</span>
+<span class="lineNum">      11 </span>            : #include &quot;cidade.hpp&quot;
+<span class="lineNum">      12 </span>            : #include &quot;gerador.hpp&quot;
+<span class="lineNum">      13 </span>            : #include &quot;adaptador.hpp&quot;
+<a name="14"><span class="lineNum">      14 </span>            : #include &quot;interconexao.hpp&quot;</a>
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">          1 : int main()</span>
+<span class="lineNum">      17 </span>            : {
+<span class="lineNum">      18 </span>            :     // Lê o arquivo de configuração
+<span class="lineNum">      19 </span><span class="lineCov">          1 :     ifstream fin(&quot;rede_distribuicao.conf&quot;);</span>
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            :     char tipo;
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span><span class="lineCov">          6 :     while (fin &gt;&gt; tipo)</span>
+<span class="lineNum">      24 </span>            :     {
+<span class="lineNum">      25 </span><span class="lineCov">          4 :         switch (tipo) {</span>
+<span class="lineNum">      26 </span>            :           case 'C':
+<span class="lineNum">      27 </span>            :           {
+<span class="lineNum">      28 </span>            :             // Inicializa variaveis
+<span class="lineNum">      29 </span><span class="lineCov">          1 :             string nome;</span>
+<span class="lineNum">      30 </span>            :             int pos_x, pos_y, recurso_necessario;
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :             // Lê linha do arquivo
+<span class="lineNum">      33 </span><span class="lineCov">          1 :             fin &gt;&gt; nome &gt;&gt; pos_x &gt;&gt; pos_y &gt;&gt; recurso_necessario;</span>
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span>            :             // Instancia cidade
+<span class="lineNum">      36 </span><span class="lineCov">          2 :             Cidade cidade(nome, pos_x, pos_y, recurso_necessario);</span>
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span>            :             // Imprime cidade
+<span class="lineNum">      39 </span><span class="lineCov">          2 :             cout &lt;&lt; cidade.getNome() &lt;&lt; &quot; - pos_x &quot; &lt;&lt; cidade.getPosX()</span>
+<span class="lineNum">      40 </span><span class="lineCov">          2 :             &lt;&lt; &quot; pos_y &quot; &lt;&lt; cidade.getPosY() &lt;&lt; &quot; recurso_necessario &quot; &lt;&lt; cidade.getRecursoNecessario()</span>
+<span class="lineNum">      41 </span><span class="lineCov">          2 :             &lt;&lt; endl;</span>
+<span class="lineNum">      42 </span>            :           }
+<span class="lineNum">      43 </span><span class="lineCov">          1 :           break;</span>
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            :           case 'A':
+<span class="lineNum">      46 </span>            :           {
+<span class="lineNum">      47 </span>            :             // Inicializa variaveis
+<span class="lineNum">      48 </span><span class="lineCov">          1 :             string nome;</span>
+<span class="lineNum">      49 </span>            :             int pos_x, pos_y;
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            :             // Lê linha do arquivo
+<span class="lineNum">      52 </span><span class="lineCov">          1 :             fin &gt;&gt; nome &gt;&gt; pos_x &gt;&gt; pos_y;</span>
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            :             // Instancia adaptador
+<span class="lineNum">      55 </span><span class="lineCov">          2 :             Adaptador adaptador(nome, pos_x, pos_y);</span>
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            :             // Imprime adaptador
+<span class="lineNum">      58 </span><span class="lineCov">          2 :             cout &lt;&lt; adaptador.getNome() &lt;&lt; &quot; - pos_x &quot; &lt;&lt; adaptador.getPosX()</span>
+<span class="lineNum">      59 </span><span class="lineCov">          3 :             &lt;&lt; &quot; pos_y &quot; &lt;&lt; adaptador.getPosY() &lt;&lt; endl;</span>
+<span class="lineNum">      60 </span>            :           }
+<span class="lineNum">      61 </span><span class="lineCov">          1 :           break;</span>
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            :           case 'G':
+<span class="lineNum">      64 </span>            :           {
+<span class="lineNum">      65 </span>            :             // Inicializa variaveis
+<span class="lineNum">      66 </span><span class="lineCov">          1 :             string nome;</span>
+<span class="lineNum">      67 </span>            :             int pos_x, pos_y, recurso_produzido, custo_gerador;
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span>            :             // Lê linha do arquivo
+<span class="lineNum">      70 </span><span class="lineCov">          1 :             fin &gt;&gt; nome &gt;&gt; pos_x &gt;&gt; pos_y &gt;&gt; recurso_produzido &gt;&gt; custo_gerador;</span>
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span>            :             // Instancia gerador
+<span class="lineNum">      73 </span><span class="lineCov">          2 :             Gerador gerador(nome, pos_x, pos_y, recurso_produzido, custo_gerador);</span>
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span>            :             // Imprime gerador
+<span class="lineNum">      76 </span><span class="lineCov">          2 :             cout &lt;&lt; gerador.getNome() &lt;&lt; &quot; - pos_x &quot; &lt;&lt; gerador.getPosX()</span>
+<span class="lineNum">      77 </span><span class="lineCov">          2 :             &lt;&lt; &quot; pos_y &quot; &lt;&lt; gerador.getPosY() &lt;&lt; &quot; recurso_produzido &quot; &lt;&lt; gerador.getRecursoProduzido()</span>
+<span class="lineNum">      78 </span><span class="lineCov">          3 :             &lt;&lt; &quot; custo_gerador &quot; &lt;&lt; gerador.getCustoGerador() &lt;&lt; endl;</span>
+<span class="lineNum">      79 </span>            :           }
+<span class="lineNum">      80 </span><span class="lineCov">          1 :           break;</span>
+<span class="lineNum">      81 </span>            : 
+<span class="lineNum">      82 </span>            :           case 'I':
+<span class="lineNum">      83 </span>            :           {
+<span class="lineNum">      84 </span>            :             // Inicializa variaveis
+<span class="lineNum">      85 </span><span class="lineCov">          1 :             string nome;</span>
+<span class="lineNum">      86 </span>            :             int pos_inic_x, pos_inic_y, pos_final_x, pos_final_y, capacidade_max,
+<span class="lineNum">      87 </span>            :             tempo_conserto, custo_do_conserto;
+<span class="lineNum">      88 </span>            :             float chance_falha;
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span>            :             // Lê linha do arquivo
+<span class="lineNum">      91 </span><span class="lineCov">          1 :             fin &gt;&gt; nome &gt;&gt; pos_inic_x &gt;&gt; pos_inic_y &gt;&gt; pos_final_x &gt;&gt; pos_final_y</span>
+<span class="lineNum">      92 </span><span class="lineCov">          1 :             &gt;&gt; capacidade_max &gt;&gt; chance_falha &gt;&gt; tempo_conserto &gt;&gt; custo_do_conserto;</span>
+<span class="lineNum">      93 </span>            : 
+<span class="lineNum">      94 </span>            :             // Instancia interconexao
+<span class="lineNum">      95 </span>            :             Interconexao interconexao(nome, pos_inic_x, pos_inic_y, pos_final_x, pos_final_y,
+<span class="lineNum">      96 </span><span class="lineCov">          2 :                 capacidade_max, chance_falha, tempo_conserto, custo_do_conserto);</span>
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span>            :             // Imprime interconexao
+<span class="lineNum">      99 </span><span class="lineCov">          2 :             cout &lt;&lt; interconexao.getNome()</span>
+<span class="lineNum">     100 </span><span class="lineCov">          2 :             &lt;&lt; &quot; - pos_inic_x &quot; &lt;&lt; interconexao.getPosInicX()</span>
+<span class="lineNum">     101 </span><span class="lineCov">          2 :             &lt;&lt; &quot; pos_inic_y &quot; &lt;&lt; interconexao.getPosInicY()</span>
+<span class="lineNum">     102 </span><span class="lineCov">          2 :             &lt;&lt; &quot; pos_final_x &quot;&lt;&lt; interconexao.getPosFinalX()</span>
+<span class="lineNum">     103 </span><span class="lineCov">          2 :             &lt;&lt; &quot; pos_final_y &quot; &lt;&lt; interconexao.getPosFinalY()</span>
+<span class="lineNum">     104 </span><span class="lineCov">          2 :             &lt;&lt; &quot; capacidade_max &quot; &lt;&lt; interconexao.getCapacidadeMax()</span>
+<span class="lineNum">     105 </span><span class="lineCov">          2 :             &lt;&lt; &quot; chance_falha &quot; &lt;&lt; interconexao.getChanceFalha()</span>
+<span class="lineNum">     106 </span><span class="lineCov">          2 :             &lt;&lt; &quot; tempo_conserto &quot; &lt;&lt; interconexao.getTempoConserto()</span>
+<span class="lineNum">     107 </span><span class="lineCov">          3 :             &lt;&lt; &quot; custo_do_conserto &quot; &lt;&lt; interconexao.getCustoDoConserto() &lt;&lt; endl;</span>
+<span class="lineNum">     108 </span>            :           }
+<span class="lineNum">     109 </span><span class="lineCov">          1 :           break;</span>
+<a name="110"><span class="lineNum">     110 </span>            :         }</a>
+<span class="lineNum">     111 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     112 </span><span class="lineCov">          4 : }</span>
+<span class="lineNum">     113 </span>            : /*
+<span class="lineNum">     114 </span>            : int main() {
+<span class="lineNum">     115 </span>            :   Cidade c1(&quot;C1&quot;,10,5,20);
+<span class="lineNum">     116 </span>            :   Gerador g1(&quot;G1&quot;, 15,10,30,1000);
+<span class="lineNum">     117 </span>            :   Adaptador a1(&quot;A1&quot;, 7,7);
+<span class="lineNum">     118 </span>            :   Interconexao i1(&quot;I1&quot;, 15,10,10,5,100,0.1,5,1000);
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span>            :   // Imprime cidade
+<span class="lineNum">     121 </span>            :   cout &lt;&lt; c1.getNome() &lt;&lt; &quot; - pos_x &quot; &lt;&lt; c1.getPosX()
+<span class="lineNum">     122 </span>            :   &lt;&lt; &quot; pos_y &quot; &lt;&lt; c1.getPosY() &lt;&lt; &quot; recurso_necessario &quot; &lt;&lt; c1.getRecursoNecessario()
+<span class="lineNum">     123 </span>            :   &lt;&lt; endl;
+<span class="lineNum">     124 </span>            : 
+<span class="lineNum">     125 </span>            :   // Imprime Gerador
+<span class="lineNum">     126 </span>            :   cout &lt;&lt; g1.getNome() &lt;&lt; &quot; - pos_x &quot; &lt;&lt; g1.getPosX()
+<span class="lineNum">     127 </span>            :   &lt;&lt; &quot; pos_y &quot; &lt;&lt; g1.getPosY() &lt;&lt; &quot; recurso_produzido &quot; &lt;&lt; g1.getRecursoProduzido()
+<span class="lineNum">     128 </span>            :   &lt;&lt; &quot; custo_gerador &quot; &lt;&lt; g1.getCustoGerador() &lt;&lt; endl;
+<span class="lineNum">     129 </span>            : 
+<span class="lineNum">     130 </span>            :   // Imprime Adaptador
+<span class="lineNum">     131 </span>            :   cout &lt;&lt; a1.getNome() &lt;&lt; &quot; - pos_x &quot; &lt;&lt; a1.getPosX()
+<span class="lineNum">     132 </span>            :   &lt;&lt; &quot; pos_y &quot; &lt;&lt; a1.getPosY() &lt;&lt; endl;
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span>            :   // Imprime Interconexao
+<span class="lineNum">     135 </span>            :   cout &lt;&lt; i1.getNome()
+<span class="lineNum">     136 </span>            :   &lt;&lt; &quot; - pos_inic_x &quot; &lt;&lt; i1.getPosInicX()
+<span class="lineNum">     137 </span>            :   &lt;&lt; &quot; pos_inic_y &quot; &lt;&lt; i1.getPosInicY()
+<span class="lineNum">     138 </span>            :   &lt;&lt; &quot; pos_final_x &quot;&lt;&lt; i1.getPosFinalX()
+<span class="lineNum">     139 </span>            :   &lt;&lt; &quot; pos_final_y &quot; &lt;&lt; i1.getPosFinalY()
+<span class="lineNum">     140 </span>            :   &lt;&lt; &quot; capacidade_max &quot; &lt;&lt; i1.getCapacidadeMax()
+<span class="lineNum">     141 </span>            :   &lt;&lt; &quot; chance_falha &quot; &lt;&lt; i1.getChanceFalha()
+<span class="lineNum">     142 </span>            :   &lt;&lt; &quot; tempo_conserto &quot; &lt;&lt; i1.getTempoConserto()
+<span class="lineNum">     143 </span>            :   &lt;&lt; &quot; custo_do_conserto &quot; &lt;&lt; i1.getCustoDoConserto() &lt;&lt; endl;
+<span class="lineNum">     144 </span>            : }
+<span class="lineNum">     145 </span>            : */
 </pre>
       </td>
     </tr>
