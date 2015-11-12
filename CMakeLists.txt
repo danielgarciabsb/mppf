@@ -10,7 +10,8 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(INCLUDE_DIR include)
 include_directories (${INCLUDE_DIR})
 
-set(MODULES cidade gerador)
+# Modulos do projeto
+set(MODULES cidade gerador interconexao)
 FOREACH(subdir ${MODULES})
     ADD_SUBDIRECTORY(${subdir})
 ENDFOREACH()

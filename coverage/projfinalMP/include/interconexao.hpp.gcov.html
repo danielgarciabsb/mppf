@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info.cleaned - projfinalMP/include/interconexao.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">projfinalMP/include</a> - interconexao.hpp<span style="font-size: 80%;"> (source / <a href="interconexao.hpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info.cleaned</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-11-12</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef DEFAULT_H</a>
+<span class="lineNum">       2 </span>            : #define DEFAULT_H
+<span class="lineNum">       3 </span>            : #include &quot;default.hpp&quot;
+<span class="lineNum">       4 </span>            : #endif
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span>            : #ifndef INTERCONEXAO_H
+<a name="7"><span class="lineNum">       7 </span>            : #define INTERCONEXAO_H</a>
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span><span class="lineCov">          1 : class Interconexao {</span>
+<span class="lineNum">      10 </span>            :   private:
+<span class="lineNum">      11 </span>            :     string nome;
+<span class="lineNum">      12 </span>            :     int pos_inic_x;
+<span class="lineNum">      13 </span>            :     int pos_inic_y;
+<span class="lineNum">      14 </span>            :     int pos_final_x;
+<span class="lineNum">      15 </span>            :     int pos_final_y;
+<span class="lineNum">      16 </span>            :     int capacidade_max;
+<span class="lineNum">      17 </span>            :     float chance_falha;
+<span class="lineNum">      18 </span>            :     int tempo_conserto;
+<a name="19"><span class="lineNum">      19 </span>            :     int custo_do_conserto;</a>
+<a name="20"><span class="lineNum">      20 </span>            :   public:</a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">          1 :     string getNome() {return nome;}</span></a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          1 :     int getPosInicX() {return pos_inic_x;}</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          1 :     int getPosInicY() {return pos_inic_y;}</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          1 :     int getPosFinalX() {return pos_final_x;}</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          1 :     int getPosFinalY() {return pos_final_y;}</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          1 :     int getCapacidadeMax() {return capacidade_max;}</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          1 :     float getChanceFalha() {return chance_falha;}</span></a>
+<span class="lineNum">      28 </span><span class="lineCov">          1 :     int getTempoConserto() {return tempo_conserto;}</span>
+<span class="lineNum">      29 </span><span class="lineCov">          1 :     int getCustoDoConserto() {return custo_do_conserto;}</span>
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            :     Interconexao(string, int, int, int, int, int, float, int, int);
+<span class="lineNum">      32 </span>            : };
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
