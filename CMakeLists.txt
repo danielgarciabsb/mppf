@@ -11,7 +11,7 @@ set(INCLUDE_DIR include)
 include_directories (${INCLUDE_DIR})
 
 # Modulos do projeto
-set(MODULES cidade gerador adaptador interconexao)
+set(MODULES lercomponentes cidade gerador adaptador interconexao)
 FOREACH(subdir ${MODULES})
     ADD_SUBDIRECTORY(${subdir})
 ENDFOREACH()
