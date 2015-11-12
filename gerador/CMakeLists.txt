@@ -1,4 +1,4 @@
-set(MODULE_NAME cidade)
+set(MODULE_NAME gerador)
 
 add_library(${MODULE_NAME} STATIC ${MODULE_NAME}.cpp)
 

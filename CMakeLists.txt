@@ -10,8 +10,10 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(INCLUDE_DIR include)
 include_directories (${INCLUDE_DIR})
 
-set(MODULES "cidade")
-ADD_SUBDIRECTORY(${MODULES})
+set(MODULES cidade gerador)
+FOREACH(subdir ${MODULES})
+    ADD_SUBDIRECTORY(${subdir})
+ENDFOREACH()
 
 # Configuracoes do GCOV
 # Determina a build para Debug do GCOV
