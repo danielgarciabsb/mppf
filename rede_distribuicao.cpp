@@ -34,6 +34,7 @@ int main()
       << " custo_gerador " << (*g_iter)->getCustoGerador() << endl;
     }
 
+    // Imprime todas interconexoes
     vector<Interconexao*>::iterator i_iter, i_end;
     for(i_iter = componentes->interconexoes.begin(), i_end = componentes->interconexoes.end() ; i_iter != i_end; ++i_iter) {
       cout << (*i_iter)->getNome()
