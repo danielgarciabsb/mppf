@@ -5,11 +5,13 @@
 
 #include "cidade.hpp"
 #include "gerador.hpp"
+#include "adaptador.hpp"
 #include "interconexao.hpp"
 
 int main() {
   Cidade c1("C1",10,5,20);
   Gerador g1("G1", 15,10,30,1000);
+  Adaptador a1("A1", 7,7);
   Interconexao i1("I1", 15,10,10,5,100,0.1,5,1000);
 
   // Imprime cidade
@@ -21,6 +23,10 @@ int main() {
   cout << g1.getNome() << " - pos_x: " << g1.getPosX()
   << " pos_y: " << g1.getPosY() << " recprod " << g1.getRecursoProduzido()
   << " custo " << g1.getCustoGerador() << endl;
+
+  // Imprime Adaptador
+  cout << a1.getNome() << " - pos_x: " << a1.getPosX()
+  << " pos_y: " << a1.getPosY() << endl;
 
   // Imprime Interconexao
   cout << i1.getNome()

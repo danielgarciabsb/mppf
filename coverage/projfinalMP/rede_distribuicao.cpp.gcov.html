@@ -31,8 +31,8 @@
             <td class="headerValue">coverage.info.cleaned</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">20</td>
-            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">23</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -67,34 +67,40 @@
 <span class="lineNum">       5 </span>            : 
 <span class="lineNum">       6 </span>            : #include &quot;cidade.hpp&quot;
 <span class="lineNum">       7 </span>            : #include &quot;gerador.hpp&quot;
-<a name="8"><span class="lineNum">       8 </span>            : #include &quot;interconexao.hpp&quot;</a>
-<span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">          1 : int main() {</span>
-<span class="lineNum">      11 </span><span class="lineCov">          1 :   Cidade c1(&quot;C1&quot;,10,5,20);</span>
-<span class="lineNum">      12 </span><span class="lineCov">          2 :   Gerador g1(&quot;G1&quot;, 15,10,30,1000);</span>
-<span class="lineNum">      13 </span><span class="lineCov">          2 :   Interconexao i1(&quot;I1&quot;, 15,10,10,5,100,0.1,5,1000);</span>
-<span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span>            :   // Imprime cidade
-<span class="lineNum">      16 </span><span class="lineCov">          2 :   cout &lt;&lt; c1.getNome() &lt;&lt; &quot; - pos_x: &quot; &lt;&lt; c1.getPosX()</span>
-<span class="lineNum">      17 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_y: &quot; &lt;&lt; c1.getPosY() &lt;&lt; &quot; rec &quot; &lt;&lt; c1.getRecursoNecessario()</span>
-<span class="lineNum">      18 </span><span class="lineCov">          1 :   &lt;&lt; endl;</span>
-<span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span>            :   // Imprime Gerador
-<span class="lineNum">      21 </span><span class="lineCov">          2 :   cout &lt;&lt; g1.getNome() &lt;&lt; &quot; - pos_x: &quot; &lt;&lt; g1.getPosX()</span>
-<span class="lineNum">      22 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_y: &quot; &lt;&lt; g1.getPosY() &lt;&lt; &quot; recprod &quot; &lt;&lt; g1.getRecursoProduzido()</span>
-<span class="lineNum">      23 </span><span class="lineCov">          2 :   &lt;&lt; &quot; custo &quot; &lt;&lt; g1.getCustoGerador() &lt;&lt; endl;</span>
-<span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span>            :   // Imprime Interconexao
-<span class="lineNum">      26 </span><span class="lineCov">          2 :   cout &lt;&lt; i1.getNome()</span>
-<span class="lineNum">      27 </span><span class="lineCov">          2 :   &lt;&lt; &quot; - pos_inic_x: &quot; &lt;&lt; i1.getPosInicX()</span>
-<span class="lineNum">      28 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_inic_y: &quot; &lt;&lt; i1.getPosInicY()</span>
-<span class="lineNum">      29 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_final_x: &quot;&lt;&lt; i1.getPosFinalX()</span>
-<span class="lineNum">      30 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_final_y: &quot; &lt;&lt; i1.getPosFinalY()</span>
-<span class="lineNum">      31 </span><span class="lineCov">          2 :   &lt;&lt; &quot; capacidade_max: &quot; &lt;&lt; i1.getCapacidadeMax()</span>
-<span class="lineNum">      32 </span><span class="lineCov">          2 :   &lt;&lt; &quot; chance_falha &quot; &lt;&lt; i1.getChanceFalha()</span>
-<a name="33"><span class="lineNum">      33 </span><span class="lineCov">          2 :   &lt;&lt; &quot; tempo_conserto &quot; &lt;&lt; i1.getTempoConserto()</span></a>
-<span class="lineNum">      34 </span><span class="lineCov">          3 :   &lt;&lt; &quot; custo_do_conserto &quot; &lt;&lt; i1.getCustoDoConserto() &lt;&lt; endl;</span>
-<span class="lineNum">      35 </span><span class="lineCov">          4 : }</span>
+<span class="lineNum">       8 </span>            : #include &quot;adaptador.hpp&quot;
+<a name="9"><span class="lineNum">       9 </span>            : #include &quot;interconexao.hpp&quot;</a>
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span><span class="lineCov">          1 : int main() {</span>
+<span class="lineNum">      12 </span><span class="lineCov">          1 :   Cidade c1(&quot;C1&quot;,10,5,20);</span>
+<span class="lineNum">      13 </span><span class="lineCov">          2 :   Gerador g1(&quot;G1&quot;, 15,10,30,1000);</span>
+<span class="lineNum">      14 </span><span class="lineCov">          2 :   Adaptador a1(&quot;A1&quot;, 7,7);</span>
+<span class="lineNum">      15 </span><span class="lineCov">          2 :   Interconexao i1(&quot;I1&quot;, 15,10,10,5,100,0.1,5,1000);</span>
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            :   // Imprime cidade
+<span class="lineNum">      18 </span><span class="lineCov">          2 :   cout &lt;&lt; c1.getNome() &lt;&lt; &quot; - pos_x: &quot; &lt;&lt; c1.getPosX()</span>
+<span class="lineNum">      19 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_y: &quot; &lt;&lt; c1.getPosY() &lt;&lt; &quot; rec &quot; &lt;&lt; c1.getRecursoNecessario()</span>
+<span class="lineNum">      20 </span><span class="lineCov">          1 :   &lt;&lt; endl;</span>
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span>            :   // Imprime Gerador
+<span class="lineNum">      23 </span><span class="lineCov">          2 :   cout &lt;&lt; g1.getNome() &lt;&lt; &quot; - pos_x: &quot; &lt;&lt; g1.getPosX()</span>
+<span class="lineNum">      24 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_y: &quot; &lt;&lt; g1.getPosY() &lt;&lt; &quot; recprod &quot; &lt;&lt; g1.getRecursoProduzido()</span>
+<span class="lineNum">      25 </span><span class="lineCov">          2 :   &lt;&lt; &quot; custo &quot; &lt;&lt; g1.getCustoGerador() &lt;&lt; endl;</span>
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span>            :   // Imprime Adaptador
+<span class="lineNum">      28 </span><span class="lineCov">          2 :   cout &lt;&lt; a1.getNome() &lt;&lt; &quot; - pos_x: &quot; &lt;&lt; a1.getPosX()</span>
+<span class="lineNum">      29 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_y: &quot; &lt;&lt; a1.getPosY() &lt;&lt; endl;</span>
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            :   // Imprime Interconexao
+<span class="lineNum">      32 </span><span class="lineCov">          2 :   cout &lt;&lt; i1.getNome()</span>
+<span class="lineNum">      33 </span><span class="lineCov">          2 :   &lt;&lt; &quot; - pos_inic_x: &quot; &lt;&lt; i1.getPosInicX()</span>
+<span class="lineNum">      34 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_inic_y: &quot; &lt;&lt; i1.getPosInicY()</span>
+<span class="lineNum">      35 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_final_x: &quot;&lt;&lt; i1.getPosFinalX()</span>
+<span class="lineNum">      36 </span><span class="lineCov">          2 :   &lt;&lt; &quot; pos_final_y: &quot; &lt;&lt; i1.getPosFinalY()</span>
+<span class="lineNum">      37 </span><span class="lineCov">          2 :   &lt;&lt; &quot; capacidade_max: &quot; &lt;&lt; i1.getCapacidadeMax()</span>
+<span class="lineNum">      38 </span><span class="lineCov">          2 :   &lt;&lt; &quot; chance_falha &quot; &lt;&lt; i1.getChanceFalha()</span>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">          2 :   &lt;&lt; &quot; tempo_conserto &quot; &lt;&lt; i1.getTempoConserto()</span></a>
+<span class="lineNum">      40 </span><span class="lineCov">          3 :   &lt;&lt; &quot; custo_do_conserto &quot; &lt;&lt; i1.getCustoDoConserto() &lt;&lt; endl;</span>
+<span class="lineNum">      41 </span><span class="lineCov">          4 : }</span>
 </pre>
       </td>
     </tr>
