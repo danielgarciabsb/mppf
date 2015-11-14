@@ -4,6 +4,7 @@
 #endif
 
 #include <vector>
+#include <typeinfo>
 
 #include "lercomponentes.hpp"
 
@@ -49,6 +50,16 @@ int main()
     }
 
     int connected = 0;
+    /**
+    * A seguir, para cada interconexao é verificado:
+    *   - se o inicio se dá em um gerador: conexao_entrada = gerador, então
+    *       - se o fim se dá em um adaptador: conexao_saida = adaptador e pula para proxima interconexao
+    *       - se o fim se dá em uma cidade: conexao_saida = cidade e pula para proxima interconexao
+    *   - se o inicio se dá em um adaptador: conexao_entrada = adaptador, então
+    *       - se o fim se dá em um adaptador: conexao_saida = adaptador e pula para proxima interconexao
+    *       - se o fim se dá em uma cidade: conexao_saida = cidade e pula para proxima interconexao
+    */
+
     // Para todas interconexoes
     for(i_iter = componentes->interconexoes.begin(), i_end = componentes->interconexoes.end() ; i_iter != i_end; ++i_iter) {
       connected = 0;
@@ -56,14 +67,15 @@ int main()
       for(g_iter = componentes->geradores.begin(), g_end = componentes->geradores.end() ; g_iter != g_end; ++g_iter) {
         // Verifica se a posicao inicial da interconexao bate com a posicao dos geradores
         if((*i_iter)->getPosInicX() == (*g_iter)->getPosX() && (*i_iter)->getPosInicY() == (*g_iter)->getPosY()) {
-          // Imprime posicao do gerador e interconexao
-          cout << "Gerador " << (*g_iter)->getNome() << " (" << (*g_iter)->getPosX() << "," << (*g_iter)->getPosY() << ")" << "-> Interconexao " << (*i_iter)->getNome();
           // Para cada adaptador
           for(a_iter = componentes->adaptadores.begin(), a_end = componentes->adaptadores.end() ; a_iter != a_end; ++a_iter) {
-            // Verifica se a posicao final da interconexao bate com a posicao do adaptador
+            // Verifica se a posicao final da interconexao é a mesma posicao do adaptador
             if((*i_iter)->getPosFinalX() == (*a_iter)->getPosX() && (*i_iter)->getPosFinalY() == (*a_iter)->getPosY()) {
-              // Imprime posicao final da interconexao e o adaptador
-              cout << "-> Adaptador " << (*a_iter)->getNome() << " (" << (*a_iter)->getPosX() << "," << (*a_iter)->getPosY() << ")" << endl;
+              // Cria objeto interconexaoGA (Gerador -> Adaptador)
+              componentes->interconexoesGA.push_back(new InterconexaoGA((*i_iter)->getNome(), (*i_iter)->getPosInicX(),
+                    (*i_iter)->getPosInicY(), (*i_iter)->getPosFinalX(), (*i_iter)->getPosFinalY(), (*i_iter)->getCapacidadeMax(),
+                    (*i_iter)->getChanceFalha(), (*i_iter)->getTempoConserto(), (*i_iter)->getCustoDoConserto(),(*g_iter), (*a_iter)));
+              // Interconexao conectada, agora pula para a proxima
               connected = 1;
               break;
             } // Fim IF pos final
@@ -73,45 +85,80 @@ int main()
           for(c_iter = componentes->cidades.begin(), c_end = componentes->cidades.end() ; c_iter != c_end; ++c_iter) {
             // Verifica se a posicao final da interconexao bate com a posicao da cidade
             if((*i_iter)->getPosFinalX() == (*c_iter)->getPosX() && (*i_iter)->getPosFinalY() == (*c_iter)->getPosY()) {
-              // Imprime posicao final da interconexao e o adaptador
-              cout << "-> Cidade " << (*c_iter)->getNome() << " (" << (*c_iter)->getPosX() << "," << (*c_iter)->getPosY() << ")" << endl;
+              // Cria objeto interconexaoGC (Gerador -> Cidade)
+              componentes->interconexoesGC.push_back(new InterconexaoGC((*i_iter)->getNome(), (*i_iter)->getPosInicX(),
+                    (*i_iter)->getPosInicY(), (*i_iter)->getPosFinalX(), (*i_iter)->getPosFinalY(), (*i_iter)->getCapacidadeMax(),
+                    (*i_iter)->getChanceFalha(), (*i_iter)->getTempoConserto(), (*i_iter)->getCustoDoConserto(),(*g_iter), (*c_iter)));
+              // Interconexao conectada, agora pula para a proxima
               connected = 1;
               break;
             }
           }
           if(connected) break;
+          // TODO: REPORTA ERRO -> CONEXAO DE SAIDA INEXISTENTE
         } // Fim IF pos inic
       } // Fim FOR gerador
       // Para cada adaptador
       for(a_iter = componentes->adaptadores.begin(), a_end = componentes->adaptadores.end() ; a_iter != a_end; ++a_iter) {
         // Verifica se a posicao inicial da interconexao bate com a posicao dos adaptadores
         if((*i_iter)->getPosInicX() == (*a_iter)->getPosX() && (*i_iter)->getPosInicY() == (*a_iter)->getPosY()) {
-          // Imprime posicao do adaptador e interconexao
-          cout << "Adaptador " << (*a_iter)->getNome() << " (" << (*a_iter)->getPosX() << "," << (*a_iter)->getPosY() << ")" << "-> Interconexao " << (*i_iter)->getNome();
-          // Para cada adaptador
-          vector<Adaptador*>::iterator a_iter2, a_end2;
-          for(a_iter2 = componentes->adaptadores.begin(), a_end2 = componentes->adaptadores.end() ; a_iter2 != a_end2; ++a_iter2) {
-            // Verifica se a posicao final da interconexao bate com a posicao do adaptador
-            if((*i_iter)->getPosFinalX() == (*a_iter2)->getPosX() && (*i_iter)->getPosFinalY() == (*a_iter2)->getPosY()) {
-              // Imprime posicao final da interconexao e o adaptador
-              cout << "-> Adaptador " << (*a_iter2)->getNome() << " (" << (*a_iter2)->getPosX() << "," << (*a_iter2)->getPosY() << ")" << endl;
-              connected = 1;
-              break;
-            } // Fim IF pos final
-          }// Fim FOR adapt
-          if(connected) break;
           // Para cada cidade
           for(c_iter = componentes->cidades.begin(), c_end = componentes->cidades.end() ; c_iter != c_end; ++c_iter) {
             // Verifica se a posicao final da interconexao bate com a posicao da cidade
             if((*i_iter)->getPosFinalX() == (*c_iter)->getPosX() && (*i_iter)->getPosFinalY() == (*c_iter)->getPosY()) {
-              // Imprime posicao final da interconexao e o adaptador
-              cout << "-> Cidade " << (*c_iter)->getNome() << " (" << (*c_iter)->getPosX() << "," << (*c_iter)->getPosY() << ")" << endl;
+              // Cria objeto interconexaoAC (Adaptador -> Cidade)
+              componentes->interconexoesAC.push_back(new InterconexaoAC((*i_iter)->getNome(), (*i_iter)->getPosInicX(),
+                    (*i_iter)->getPosInicY(), (*i_iter)->getPosFinalX(), (*i_iter)->getPosFinalY(), (*i_iter)->getCapacidadeMax(),
+                    (*i_iter)->getChanceFalha(), (*i_iter)->getTempoConserto(), (*i_iter)->getCustoDoConserto(),(*a_iter), (*c_iter)));
+              // Interconexao conectada, agora pula para a proxima
               connected = 1;
               break;
             }
           }
           if(connected) break;
+          // Para cada adaptador
+          vector<Adaptador*>::iterator a_iter2, a_end2;
+          for(a_iter2 = componentes->adaptadores.begin(), a_end2 = componentes->adaptadores.end() ; a_iter2 != a_end2; ++a_iter2) {
+            // Verifica se a posicao final da interconexao bate com a posicao do adaptador
+            if((*i_iter)->getPosFinalX() == (*a_iter2)->getPosX() && (*i_iter)->getPosFinalY() == (*a_iter2)->getPosY()) {
+              // Cria objeto interconexaoAA (Adaptador -> Adaptador)
+              componentes->interconexoesAA.push_back(new InterconexaoAA((*i_iter)->getNome(), (*i_iter)->getPosInicX(),
+                    (*i_iter)->getPosInicY(), (*i_iter)->getPosFinalX(), (*i_iter)->getPosFinalY(), (*i_iter)->getCapacidadeMax(),
+                    (*i_iter)->getChanceFalha(), (*i_iter)->getTempoConserto(), (*i_iter)->getCustoDoConserto(),(*a_iter), (*a_iter2)));
+              // Interconexao conectada, agora pula para a proxima
+              connected = 1;
+              break;
+            } // Fim IF pos final
+          }// Fim FOR adapt
+          if(connected) break;
+          // TODO: REPORTA ERRO -> CONEXAO DE SAIDA INEXISTENTE
         } // Fim IF pos inic
       } // Fim FOR gerador
+      // TODO: REPORTA ERRO -> CONEXAO DE ENTRADA E SAIDA INEXISTENTE
     } // Fim FOR todas intercon
+
+    vector<InterconexaoGA*>::iterator ga_iter, ga_end;
+    for(ga_iter = componentes->interconexoesGA.begin(), ga_end = componentes->interconexoesGA.end() ; ga_iter != ga_end; ++ga_iter) {
+      cout << "Gerador " << (*ga_iter)->getEntrada()->getNome() << "-> InterconexaoGA " << (*ga_iter)->getNome()
+      << " -> Adaptador " << (*ga_iter)->getSaida()->getNome() << endl;
+    }
+
+    vector<InterconexaoGC*>::iterator gc_iter, gc_end;
+    for(gc_iter = componentes->interconexoesGC.begin(), gc_end = componentes->interconexoesGC.end() ; gc_iter != gc_end; ++gc_iter) {
+      cout << "Gerador " << (*gc_iter)->getEntrada()->getNome() << "-> InterconexaoGC " << (*gc_iter)->getNome()
+      << " -> Cidade " << (*gc_iter)->getSaida()->getNome() << endl;
+    }
+
+    vector<InterconexaoAC*>::iterator ac_iter, ac_end;
+    for(ac_iter = componentes->interconexoesAC.begin(), ac_end = componentes->interconexoesAC.end() ; ac_iter != ac_end; ++ac_iter) {
+      cout << "Adaptador " << (*ac_iter)->getEntrada()->getNome() << "-> InterconexaoAC " << (*ac_iter)->getNome()
+      << " -> Cidade " << (*ac_iter)->getSaida()->getNome() << endl;
+    }
+
+    vector<InterconexaoAA*>::iterator aa_iter, aa_end;
+    for(aa_iter = componentes->interconexoesAA.begin(), aa_end = componentes->interconexoesAA.end() ; aa_iter != aa_end; ++aa_iter) {
+      cout << "Adaptador " << (*aa_iter)->getEntrada()->getNome() << "-> InterconexaoAA " << (*aa_iter)->getNome()
+      << " -> Adaptador " << (*aa_iter)->getSaida()->getNome() << endl;
+    }
+
 }

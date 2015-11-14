@@ -10,6 +10,10 @@ typedef struct componentesType
   vector<Adaptador*> adaptadores;
   vector<Gerador*> geradores;
   vector<Interconexao*> interconexoes;
+  vector<InterconexaoGA*> interconexoesGA;
+  vector<InterconexaoGC*> interconexoesGC;
+  vector<InterconexaoAC*> interconexoesAC;
+  vector<InterconexaoAA*> interconexoesAA;
 } componentesArray;
 
 componentesArray * lerComponentesDoArquivo(string arquivo);

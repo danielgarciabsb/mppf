@@ -3,6 +3,10 @@
 #include "default.hpp"
 #endif
 
+#include "cidade.hpp"
+#include "gerador.hpp"
+#include "adaptador.hpp"
+
 #ifndef INTERCONEXAO_H
 #define INTERCONEXAO_H
 
@@ -29,6 +33,98 @@ class Interconexao {
     int getCustoDoConserto() {return custo_do_conserto;}
 
     Interconexao(string, int, int, int, int, int, float, int, int);
+};
+
+#endif
+
+#ifndef INTERCONEXAO_GA_H
+#define INTERCONEXAO_GA_H
+
+class InterconexaoGA: public Interconexao {
+  private:
+    Gerador * entrada;
+    Adaptador * saida;
+  public:
+    Gerador * getEntrada() {return entrada;}
+    Adaptador * getSaida() {return saida;}
+
+    InterconexaoGA(string nome, int pos_inic_x, int pos_inic_y,
+      int pos_final_x, int pos_final_y, int capacidade_max, float chance_falha,
+      int tempo_conserto, int custo_do_conserto, Gerador * entrada, Adaptador * saida):
+      Interconexao(nome, pos_inic_x, pos_inic_y, pos_final_x, pos_final_y,
+                  capacidade_max, chance_falha, tempo_conserto, custo_do_conserto) {
+                    this->entrada = entrada;
+                    this->saida = saida;
+                  };
+};
+
+#endif
+
+#ifndef INTERCONEXAO_GC_H
+#define INTERCONEXAO_GC_H
+
+class InterconexaoGC: public Interconexao {
+  private:
+    Gerador * entrada;
+    Cidade * saida;
+  public:
+    Gerador * getEntrada() {return entrada;}
+    Cidade * getSaida() {return saida;}
+
+    InterconexaoGC(string nome, int pos_inic_x, int pos_inic_y,
+      int pos_final_x, int pos_final_y, int capacidade_max, float chance_falha,
+      int tempo_conserto, int custo_do_conserto, Gerador * entrada, Cidade * saida):
+      Interconexao(nome, pos_inic_x, pos_inic_y, pos_final_x, pos_final_y,
+                  capacidade_max, chance_falha, tempo_conserto, custo_do_conserto) {
+                    this->entrada = entrada;
+                    this->saida = saida;
+                  };
+};
+
+#endif
+
+#ifndef INTERCONEXAO_AC_H
+#define INTERCONEXAO_AC_H
+
+class InterconexaoAC: public Interconexao {
+  private:
+    Adaptador * entrada;
+    Cidade * saida;
+  public:
+    Adaptador * getEntrada() {return entrada;}
+    Cidade * getSaida() {return saida;}
+
+    InterconexaoAC(string nome, int pos_inic_x, int pos_inic_y,
+      int pos_final_x, int pos_final_y, int capacidade_max, float chance_falha,
+      int tempo_conserto, int custo_do_conserto, Adaptador * entrada, Cidade * saida):
+      Interconexao(nome, pos_inic_x, pos_inic_y, pos_final_x, pos_final_y,
+                  capacidade_max, chance_falha, tempo_conserto, custo_do_conserto) {
+                    this->entrada = entrada;
+                    this->saida = saida;
+                  };
+};
+
+#endif
+
+#ifndef INTERCONEXAO_AA_H
+#define INTERCONEXAO_AA_H
+
+class InterconexaoAA: public Interconexao {
+  private:
+    Adaptador * entrada;
+    Adaptador * saida;
+  public:
+    Adaptador * getEntrada() {return entrada;}
+    Adaptador * getSaida() {return saida;}
+
+    InterconexaoAA(string nome, int pos_inic_x, int pos_inic_y,
+      int pos_final_x, int pos_final_y, int capacidade_max, float chance_falha,
+      int tempo_conserto, int custo_do_conserto, Adaptador * entrada, Adaptador * saida):
+      Interconexao(nome, pos_inic_x, pos_inic_y, pos_final_x, pos_final_y,
+                  capacidade_max, chance_falha, tempo_conserto, custo_do_conserto) {
+                    this->entrada = entrada;
+                    this->saida = saida;
+                  };
 };
 
 #endif
