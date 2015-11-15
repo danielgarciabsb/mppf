@@ -52,12 +52,12 @@ int main()
     int connected = 0;
     /**
     * A seguir, para cada interconexao é verificado:
-    *   - se o inicio se dá em um gerador: conexao_entrada = gerador, então
-    *       - se o fim se dá em um adaptador: conexao_saida = adaptador e pula para proxima interconexao
-    *       - se o fim se dá em uma cidade: conexao_saida = cidade e pula para proxima interconexao
-    *   - se o inicio se dá em um adaptador: conexao_entrada = adaptador, então
-    *       - se o fim se dá em um adaptador: conexao_saida = adaptador e pula para proxima interconexao
-    *       - se o fim se dá em uma cidade: conexao_saida = cidade e pula para proxima interconexao
+    *   - se o inicio se dá em um gerador, entao:
+    *       - se o fim se dá em um adaptador: new interconexoesGA e pula para proxima interconexao
+    *       - se o fim se dá em uma cidade: new interconexoesGC e pula para proxima interconexao
+    *   - se o inicio se dá em um adaptador, entao:
+    *       - se o fim se dá em uma cidade: new interconexoesAC e pula para proxima interconexao
+    *       - se o fim se dá em um adaptador: new interconexoesAA e pula para proxima interconexao
     */
 
     // Para todas interconexoes
@@ -96,6 +96,7 @@ int main()
           }
           if(connected) break;
           // TODO: REPORTA ERRO -> CONEXAO DE SAIDA INEXISTENTE
+          cout << "Conexao de saida da Interconexao: " << (*i_iter)->getNome() << " inexistente!" << endl;
         } // Fim IF pos inic
       } // Fim FOR gerador
       // Para cada adaptador
@@ -139,26 +140,50 @@ int main()
 
     vector<InterconexaoGA*>::iterator ga_iter, ga_end;
     for(ga_iter = componentes->interconexoesGA.begin(), ga_end = componentes->interconexoesGA.end() ; ga_iter != ga_end; ++ga_iter) {
-      cout << "Gerador " << (*ga_iter)->getEntrada()->getNome() << "-> InterconexaoGA " << (*ga_iter)->getNome()
-      << " -> Adaptador " << (*ga_iter)->getSaida()->getNome() << endl;
+      (*ga_iter)->getSaida()->addCarga((*ga_iter)->getCarga());
+      cout << "Gerador " << (*ga_iter)->getEntrada()->getNome()
+      << " (getRecursoProduzido:" << (*ga_iter)->getEntrada()->getRecursoProduzido() << ")"
+      << " -> InterconexaoGA " << (*ga_iter)->getNome()
+      << " (getCapacidadeMax:" << (*ga_iter)->getCapacidadeMax()
+      << ", getCarga:" << (*ga_iter)->getCarga() << ")"
+      << " -> Adaptador " << (*ga_iter)->getSaida()->getNome()
+      << " (getCarga:" << (*ga_iter)->getSaida()->getCarga() << ")" << endl;
     }
 
     vector<InterconexaoGC*>::iterator gc_iter, gc_end;
     for(gc_iter = componentes->interconexoesGC.begin(), gc_end = componentes->interconexoesGC.end() ; gc_iter != gc_end; ++gc_iter) {
-      cout << "Gerador " << (*gc_iter)->getEntrada()->getNome() << "-> InterconexaoGC " << (*gc_iter)->getNome()
+      cout << "Gerador " << (*gc_iter)->getEntrada()->getNome()
+      << " (getRecursoProduzido:" << (*gc_iter)->getEntrada()->getRecursoProduzido() << ")"
+      << "-> InterconexaoGC " << (*gc_iter)->getNome()
+      << " (getCapacidadeMax:" << (*gc_iter)->getCapacidadeMax()
+      << ", getCarga:" << (*gc_iter)->getCarga() << ")"
       << " -> Cidade " << (*gc_iter)->getSaida()->getNome() << endl;
-    }
-
-    vector<InterconexaoAC*>::iterator ac_iter, ac_end;
-    for(ac_iter = componentes->interconexoesAC.begin(), ac_end = componentes->interconexoesAC.end() ; ac_iter != ac_end; ++ac_iter) {
-      cout << "Adaptador " << (*ac_iter)->getEntrada()->getNome() << "-> InterconexaoAC " << (*ac_iter)->getNome()
-      << " -> Cidade " << (*ac_iter)->getSaida()->getNome() << endl;
     }
 
     vector<InterconexaoAA*>::iterator aa_iter, aa_end;
     for(aa_iter = componentes->interconexoesAA.begin(), aa_end = componentes->interconexoesAA.end() ; aa_iter != aa_end; ++aa_iter) {
-      cout << "Adaptador " << (*aa_iter)->getEntrada()->getNome() << "-> InterconexaoAA " << (*aa_iter)->getNome()
-      << " -> Adaptador " << (*aa_iter)->getSaida()->getNome() << endl;
+      (*aa_iter)->getSaida()->addCarga((*aa_iter)->getCarga());
+      cout << "Adaptador " << (*aa_iter)->getEntrada()->getNome()
+      << " (getCarga:" << (*aa_iter)->getEntrada()->getCarga() << ")"
+      << "-> InterconexaoAA " << (*aa_iter)->getNome()
+      << " (getCapacidadeMax:" << (*aa_iter)->getCapacidadeMax()
+      << ", getCarga:" << (*aa_iter)->getCarga() << ")"
+      << " -> Adaptador " << (*aa_iter)->getSaida()->getNome()
+      << " (getCarga:" << (*aa_iter)->getSaida()->getCarga() << ")"
+      << endl;
+    }
+
+    vector<InterconexaoAC*>::iterator ac_iter, ac_end;
+    for(ac_iter = componentes->interconexoesAC.begin(), ac_end = componentes->interconexoesAC.end() ; ac_iter != ac_end; ++ac_iter) {
+      (*ac_iter)->getSaida()->addCarga((*ac_iter)->getCarga());
+      cout << "Adaptador " << (*ac_iter)->getEntrada()->getNome()
+      << " (getCarga:" << (*ac_iter)->getEntrada()->getCarga() << ")"
+      << "-> InterconexaoAC " << (*ac_iter)->getNome()
+      << " (getCapacidadeMax:" << (*ac_iter)->getCapacidadeMax()
+      << ", getCarga:" << (*ac_iter)->getCarga() << ")"
+      << " -> Cidade " << (*ac_iter)->getSaida()->getNome()
+      << " (getCarga:" << (*ac_iter)->getSaida()->getCarga() << ")"
+      << endl;
     }
 
 }
